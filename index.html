@@ -18,8 +18,8 @@
       #main {
         /* 512px */
         width: 504px;
-        /* should be 384px (512 * (24/32)) but there are space left right and bottom */
-        height: 368px;
+        /* (512 * (24/32)) */
+        height: 384px;
         background: #999999;
         padding: 16px;
         margin: 0;
@@ -39,6 +39,53 @@
         src: url('zx81/zx81.ttf');
       }
     </style>
+
+    <script>
+      class Screen {
+        constructor(screenId) {
+          this.node = document.getElementById(screenId);
+          this.size = { x: 32, y: 24 };
+          this.cursor = { x: 0, y: 0 };
+          this.cursorChar = 'Ø';
+
+          this._setupScreenElement();
+        }
+
+        _setupScreenElement() {
+          this.node.innerHTML = '';
+
+          for (let i = 0; i < this.size.y; i++) {
+            let row = document.createElement('p');
+            this.node.appendChild(row);
+          }
+        }
+
+        moveTo(pos) {
+          // this.node.innerText = this.cursorChar;
+        }
+
+        clear() {
+          this.node.childNodes.forEach(x => x.innerText = '');
+          // this.moveTo({x: 0, y: 0});
+        }
+
+        print(s) {
+          this.node.childNodes[this.cursor.y].innerText = s;
+
+          if (this.cursor.y < this.size.y)
+            this.cursor.y += 1;
+        }
+      }
+
+
+      window.onload = () => {
+        let screen = new Screen('main');
+
+        screen.clear();
+        for (let i = 0; i < screen.size.y; i++)
+          screen.print('01234567890123456789012345678901');
+      }
+    </script>
   </head>
 
   <body>
@@ -51,34 +98,7 @@
         <p>&#xa0;&#xa1;&#xa2;&#xa3;&#xa4;&#xa5;&#xa6;&#xa7;&#xa8;&#xa9;&#xaa;&#xab;&#xac;&#xad;&#xae;&#xaf;&#xb0;&#xb1;&#xb2;&#xb3;&#xb4;&#xb5;&#xb6;&#xb7;&#xb8;&#xb9;&#xba;&#xbb;&#xbc;&#xbd;&#xbe;&#xbf;</p>
         <p>&#xc0;&#xc1;&#xc2;&#xc3;&#xc4;&#xc5;&#xc6;&#xc7;&#xc8;&#xc9;&#xca;&#xcb;&#xcc;&#xcd;&#xce;&#xcf;&#xd0;&#xd1;&#xd2;&#xd3;&#xd4;&#xd5;&#xd6;&#xd7;&#xd8;&#xd9;&#xda;&#xdb;&#xdc;&#xdd;&#xde;&#xdf;</p>
         <p>&#xe0;&#xe1;&#xe2;&#xe3;&#xe4;&#xe5;&#xe6;&#xe7;&#xe8;&#xe9;&#xea;&#xeb;&#xec;&#xed;&#xee;&#xef;&#xf0;&#xf1;&#xf2;&#xf3;&#xf4;&#xf5;&#xf6;&#xf7;&#xf8;&#xf9;&#xfa;&#xfb;&#xfc;&#xfd;&#xfe;&#xff;</p>
-      </div>
- -->
-      <!-- full screen of digits -->
-      <div>
-        <p>01234567890123456789012345678901</p>
-        <p>01234567890123456789012345678901</p>
-        <p>01234567890123456789012345678901</p>
-        <p>01234567890123456789012345678901</p>
-        <p>01234567890123456789012345678901</p>
-        <p>01234567890123456789012345678901</p>
-        <p>01234567890123456789012345678901</p>
-        <p>01234567890123456789012345678901</p>
-        <p>01234567890123456789012345678901</p>
-        <p>01234567890123456789012345678901</p>
-        <p>01234567890123456789012345678901</p>
-        <p>01234567890123456789012345678901</p>
-        <p>01234567890123456789012345678901</p>
-        <p>01234567890123456789012345678901</p>
-        <p>01234567890123456789012345678901</p>
-        <p>01234567890123456789012345678901</p>
-        <p>01234567890123456789012345678901</p>
-        <p>01234567890123456789012345678901</p>
-        <p>01234567890123456789012345678901</p>
-        <p>01234567890123456789012345678901</p>
-        <p>01234567890123456789012345678901</p>
-        <p>01234567890123456789012345678901</p>
-        <p>01234567890123456789012345678901</p>
-      </div>
+      </div> -->
     </div>
   </body>
 </html>
