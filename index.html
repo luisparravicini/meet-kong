@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>test</title>
+    <style>
+      /* 24 lines × 32 characters or 64 × 48 pixels graphics mode */
+
+      body {
+        padding: 0;
+        margin: 0;
+        background: #000000;
+        height: 100vh;
+        display: grid;
+        align-content: center;
+        justify-content: center;
+      }
+
+      #main {
+        /* 512px */
+        width: 504px;
+        /* should be 384px (512 * (24/32)) but there are space left right and bottom */
+        height: 368px;
+        background: #999999;
+        padding: 16px;
+        margin: 0;
+      }
+
+      #main p {
+        text-indent: 0;
+        margin: 0;
+        padding: 0;
+        font-family: ZX81;
+        font-size: 16px;
+        color: #000000;
+      }
+
+      @font-face {
+        font-family: ZX81;
+        src: url('zx81/zx81.ttf');
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="main">
+      <!-- first 256 chars -->
+<!--       <div>
+        <p>&#x0;&#x1;&#x2;&#x3;&#x4;&#x5;&#x6;&#x7;&#x8;&#x9;&#xa;&#xb;&#xc;&#xd;&#xe;&#xf;&#x10;&#x11;&#x12;&#x13;&#x14;&#x15;&#x16;&#x17;&#x18;&#x19;&#x1a;&#x1b;&#x1c;&#x1d;&#x1e;&#x1f;</p>\n<p> !\"\#$%&'()*+,-./0123456789:;<=>?</p>
+        <p>@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_</p>
+        <p>`abcdefghijklmnopqrstuvwxyz{|}~\u007F</p>\n<p>&#x80;&#x81;&#x82;&#x83;&#x84;&#x85;&#x86;&#x87;&#x88;&#x89;&#x8a;&#x8b;&#x8c;&#x8d;&#x8e;&#x8f;&#x90;&#x91;&#x92;&#x93;&#x94;&#x95;&#x96;&#x97;&#x98;&#x99;&#x9a;&#x9b;&#x9c;&#x9d;&#x9e;&#x9f;</p>
+        <p>&#xa0;&#xa1;&#xa2;&#xa3;&#xa4;&#xa5;&#xa6;&#xa7;&#xa8;&#xa9;&#xaa;&#xab;&#xac;&#xad;&#xae;&#xaf;&#xb0;&#xb1;&#xb2;&#xb3;&#xb4;&#xb5;&#xb6;&#xb7;&#xb8;&#xb9;&#xba;&#xbb;&#xbc;&#xbd;&#xbe;&#xbf;</p>
+        <p>&#xc0;&#xc1;&#xc2;&#xc3;&#xc4;&#xc5;&#xc6;&#xc7;&#xc8;&#xc9;&#xca;&#xcb;&#xcc;&#xcd;&#xce;&#xcf;&#xd0;&#xd1;&#xd2;&#xd3;&#xd4;&#xd5;&#xd6;&#xd7;&#xd8;&#xd9;&#xda;&#xdb;&#xdc;&#xdd;&#xde;&#xdf;</p>
+        <p>&#xe0;&#xe1;&#xe2;&#xe3;&#xe4;&#xe5;&#xe6;&#xe7;&#xe8;&#xe9;&#xea;&#xeb;&#xec;&#xed;&#xee;&#xef;&#xf0;&#xf1;&#xf2;&#xf3;&#xf4;&#xf5;&#xf6;&#xf7;&#xf8;&#xf9;&#xfa;&#xfb;&#xfc;&#xfd;&#xfe;&#xff;</p>
+      </div>
+ -->
+      <!-- full screen of digits -->
+      <div>
+        <p>01234567890123456789012345678901</p>
+        <p>01234567890123456789012345678901</p>
+        <p>01234567890123456789012345678901</p>
+        <p>01234567890123456789012345678901</p>
+        <p>01234567890123456789012345678901</p>
+        <p>01234567890123456789012345678901</p>
+        <p>01234567890123456789012345678901</p>
+        <p>01234567890123456789012345678901</p>
+        <p>01234567890123456789012345678901</p>
+        <p>01234567890123456789012345678901</p>
+        <p>01234567890123456789012345678901</p>
+        <p>01234567890123456789012345678901</p>
+        <p>01234567890123456789012345678901</p>
+        <p>01234567890123456789012345678901</p>
+        <p>01234567890123456789012345678901</p>
+        <p>01234567890123456789012345678901</p>
+        <p>01234567890123456789012345678901</p>
+        <p>01234567890123456789012345678901</p>
+        <p>01234567890123456789012345678901</p>
+        <p>01234567890123456789012345678901</p>
+        <p>01234567890123456789012345678901</p>
+        <p>01234567890123456789012345678901</p>
+        <p>01234567890123456789012345678901</p>
+      </div>
+    </div>
+  </body>
+</html>
