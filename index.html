@@ -15,14 +15,18 @@
         justify-content: center;
       }
 
-      #main {
+      #container {
         /* 512px */
-        width: 504px;
+        width: 512px;
         /* (512 * (24/32)) */
         height: 384px;
         background: #999999;
         padding: 16px;
         margin: 0;
+      }
+
+      #main {
+        position: relative;
       }
 
       #main p {
@@ -32,11 +36,15 @@
         font-family: ZX81;
         font-size: 16px;
         color: #000000;
+
+        position: absolute;
       }
 
       @font-face {
         font-family: ZX81;
-        src: url('zx81/zx81.ttf');
+        src: url('zx81/ZX81-VDU.woff');
+        /*src: url('zx81/zx81.ttf');*/
+        /*src: url('zx81/zx82system.ttf');*/
       }
     </style>
 
@@ -47,6 +55,7 @@
           this.size = { x: 32, y: 24 };
           this.cursor = { x: 0, y: 0 };
           this.cursorChar = 'Ø';
+          this.screenDelay = 10;
 
           this._setupScreenElement();
         }
@@ -54,10 +63,27 @@
         _setupScreenElement() {
           this.node.innerHTML = '';
 
-          for (let i = 0; i < this.size.y; i++) {
-            let row = document.createElement('p');
-            this.node.appendChild(row);
+          // for (let i = 0; i < this.size.y; i++) {
+          //   let row = document.createElement('p');
+          //   this.node.appendChild(row);
+          // }
+          let fontSize = 16;
+
+          this._cells = [];
+          for (let y = 0; y < this.size.y; y++) {
+            let row = [];
+            this._cells.push(row);
+            for (let x = 0; x < this.size.x; x++) {
+              let cell = document.createElement('p');
+              cell.setAttribute('style', `top:${y * fontSize}px; left:${x * fontSize}px`);
+              cell.innerText = 'X';
+
+              this.node.appendChild(cell);
+
+              row.push(cell);
+            }
           }
+
         }
 
         moveTo(pos) {
@@ -65,40 +91,102 @@
         }
 
         clear() {
-          this.node.childNodes.forEach(x => x.innerText = '');
+          for (let y = 0; y < this.size.y; y++) {
+            for (let x = 0; x < this.size.x; x++) {
+              this.set_char(x, y, '');
+            }
+          }
           // this.moveTo({x: 0, y: 0});
         }
 
-        print(s) {
-          this.node.childNodes[this.cursor.y].innerText = s;
+        set_char(x, y, c) {
+          return new Promise((resolve, _reject) => {
+            setTimeout(() => {
+              this._cells[y][x].innerText = c;
+              resolve();
+            }, this.screenDelay);
+          });
+        }
 
-          if (this.cursor.y < this.size.y)
-            this.cursor.y += 1;
+        _print_row(s, y) {
+          return new Promise((resolve, _reject) => {
+            setTimeout(() => {
+              let y = this.cursor.y;
+              for (let x = 0; x < this.size.x; x++) {
+                this._cells[y][x].innerText = s[x];
+              }
+              resolve();
+            }, this.screenDelay);
+          });
+        }
+
+        async print_char_at(c, x, y) {
+          return new Promise((resolve, _reject) => {
+            setTimeout(() => {
+              let s = this.node.childNodes[y].innerText;
+              s = s.substring(0, x) + c + s.substring(x + 1);
+
+              this.node.childNodes[y].innerText = s;
+
+              resolve();
+            }, 20);
+          });
+        }
+
+        async print(s) {
+          await this._print_row(s, this.cursor.y).then(() => {
+            if (this.cursor.y < this.size.y)
+              this.cursor.y++;
+          });
         }
       }
 
 
-      window.onload = () => {
+      async function main() {
         let screen = new Screen('main');
 
         screen.clear();
         for (let i = 0; i < screen.size.y; i++)
-          screen.print('01234567890123456789012345678901');
+          await screen.print('01234567890123456789012345678901');
+
+        screen.clear();
+        
+        // prints all the characters
+        let chars =[32, 33, 34, 35, 36, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123, 124, 125, 126, 163, 176, 177, 178, 179, 180, 181, 182, 183, 184, 185, 186, 187, 188, 189, 190, 191, 192, 193, 194, 195, 196, 197, 198, 199, 200, 201, 202, 203, 204, 205, 206, 207, 208, 209, 210, 211, 212, 213, 241, 242, 243, 244, 245, 246, 247, 248, 249, 250];
+        let x = 0;
+        let y = 0;
+        for (let i = 0; i < chars.length; i++) {
+          let c = String.fromCharCode(chars[i]);
+
+          await screen.set_char(x, y, c);
+
+          x += 1;
+          if (x >= screen.size.x) {
+            x = 0;
+            y += 1;
+          }
+        }
+      }
+
+      window.onload = () => {
+        main();
       }
     </script>
   </head>
 
   <body>
-    <div id="main">
-      <!-- first 256 chars -->
-<!--       <div>
-        <p>&#x0;&#x1;&#x2;&#x3;&#x4;&#x5;&#x6;&#x7;&#x8;&#x9;&#xa;&#xb;&#xc;&#xd;&#xe;&#xf;&#x10;&#x11;&#x12;&#x13;&#x14;&#x15;&#x16;&#x17;&#x18;&#x19;&#x1a;&#x1b;&#x1c;&#x1d;&#x1e;&#x1f;</p>\n<p> !\"\#$%&'()*+,-./0123456789:;<=>?</p>
-        <p>@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_</p>
-        <p>`abcdefghijklmnopqrstuvwxyz{|}~\u007F</p>\n<p>&#x80;&#x81;&#x82;&#x83;&#x84;&#x85;&#x86;&#x87;&#x88;&#x89;&#x8a;&#x8b;&#x8c;&#x8d;&#x8e;&#x8f;&#x90;&#x91;&#x92;&#x93;&#x94;&#x95;&#x96;&#x97;&#x98;&#x99;&#x9a;&#x9b;&#x9c;&#x9d;&#x9e;&#x9f;</p>
-        <p>&#xa0;&#xa1;&#xa2;&#xa3;&#xa4;&#xa5;&#xa6;&#xa7;&#xa8;&#xa9;&#xaa;&#xab;&#xac;&#xad;&#xae;&#xaf;&#xb0;&#xb1;&#xb2;&#xb3;&#xb4;&#xb5;&#xb6;&#xb7;&#xb8;&#xb9;&#xba;&#xbb;&#xbc;&#xbd;&#xbe;&#xbf;</p>
-        <p>&#xc0;&#xc1;&#xc2;&#xc3;&#xc4;&#xc5;&#xc6;&#xc7;&#xc8;&#xc9;&#xca;&#xcb;&#xcc;&#xcd;&#xce;&#xcf;&#xd0;&#xd1;&#xd2;&#xd3;&#xd4;&#xd5;&#xd6;&#xd7;&#xd8;&#xd9;&#xda;&#xdb;&#xdc;&#xdd;&#xde;&#xdf;</p>
-        <p>&#xe0;&#xe1;&#xe2;&#xe3;&#xe4;&#xe5;&#xe6;&#xe7;&#xe8;&#xe9;&#xea;&#xeb;&#xec;&#xed;&#xee;&#xef;&#xf0;&#xf1;&#xf2;&#xf3;&#xf4;&#xf5;&#xf6;&#xf7;&#xf8;&#xf9;&#xfa;&#xfb;&#xfc;&#xfd;&#xfe;&#xff;</p>
-      </div> -->
+    <div id="container">
+      <div id="main">
+        <!-- first 256 chars -->
+  <!--       <div>
+          <p>&#x0;&#x1;&#x2;&#x3;&#x4;&#x5;&#x6;&#x7;&#x8;&#x9;&#xa;&#xb;&#xc;&#xd;&#xe;&#xf;&#x10;&#x11;&#x12;&#x13;&#x14;&#x15;&#x16;&#x17;&#x18;&#x19;&#x1a;&#x1b;&#x1c;&#x1d;&#x1e;&#x1f;</p>\n<p> !\"\#$%&'()*+,-./0123456789:;<=>?</p>
+          <p>@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_</p>
+          <p>`abcdefghijklmnopqrstuvwxyz{|}~\u007F</p>\n<p>&#x80;&#x81;&#x82;&#x83;&#x84;&#x85;&#x86;&#x87;&#x88;&#x89;&#x8a;&#x8b;&#x8c;&#x8d;&#x8e;&#x8f;&#x90;&#x91;&#x92;&#x93;&#x94;&#x95;&#x96;&#x97;&#x98;&#x99;&#x9a;&#x9b;&#x9c;&#x9d;&#x9e;&#x9f;</p>
+          <p>&#xa0;&#xa1;&#xa2;&#xa3;&#xa4;&#xa5;&#xa6;&#xa7;&#xa8;&#xa9;&#xaa;&#xab;&#xac;&#xad;&#xae;&#xaf;&#xb0;&#xb1;&#xb2;&#xb3;&#xb4;&#xb5;&#xb6;&#xb7;&#xb8;&#xb9;&#xba;&#xbb;&#xbc;&#xbd;&#xbe;&#xbf;</p>
+          <p>&#xc0;&#xc1;&#xc2;&#xc3;&#xc4;&#xc5;&#xc6;&#xc7;&#xc8;&#xc9;&#xca;&#xcb;&#xcc;&#xcd;&#xce;&#xcf;&#xd0;&#xd1;&#xd2;&#xd3;&#xd4;&#xd5;&#xd6;&#xd7;&#xd8;&#xd9;&#xda;&#xdb;&#xdc;&#xdd;&#xde;&#xdf;</p>
+          <p>&#xe0;&#xe1;&#xe2;&#xe3;&#xe4;&#xe5;&#xe6;&#xe7;&#xe8;&#xe9;&#xea;&#xeb;&#xec;&#xed;&#xee;&#xef;&#xf0;&#xf1;&#xf2;&#xf3;&#xf4;&#xf5;&#xf6;&#xf7;&#xf8;&#xf9;&#xfa;&#xfb;&#xfc;&#xfd;&#xfe;&#xff;</p>
+        </div> -->
+      </div>
     </div>
   </body>
 </html>
