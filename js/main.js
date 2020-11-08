@@ -1,4 +1,4 @@
-
+/* keep encoding as iso-8859-1 */
 
 async function printCharset(screen, spaces) {
   let chars =[32, 33, 34, 35, 36, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 
@@ -68,5 +68,32 @@ async function main() {
   screen.clear();
   // printCharset(screen);
 
+    let levelData = [
+      ' SCORE=00000            LIVES=3 ',
+      '          o                     ',
+      '                        *  ³    ',
+      '    ½           תתתHתתתתת µ"ץ   ',
+      '    תתתHתתתת       H    ·_._._פ ',
+      '       H           H    µס´_קעץ ',
+      '       H           H     µ_ _ץ  ',
+      'o      H           H      _ _   ',
+      'תתתתHתתתתתתתתתתHתתתתתתתתתתתתתתתת',
+      '    H          H                ',
+      ' ½  H          H             ½  ',
+      'תתתתתתתת   תתתתתתתתHתת   תתתתתתת',
+      '                   H            ',
+      '            ½      H            ',
+      'תתתHתתתתתתתתתת   תתתתת   תתHתתתת',
+      '   H                       H    ',
+      '   H                       H    ',
+      ' תתתתתתתHתתתתת   תתתתHתתתתתתתת  ',
+      '        H            H          ',
+      '        H            H          ',
+      'תHתתתתתתתתתתתתתHתתתתתתתתתתתתתHתת',
+      ' H             H             H  ',
+      ' H             H             H  ',
+      '÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷',
+    ];
+  level.load(levelData);
   level.draw(screen);
 }
