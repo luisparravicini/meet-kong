@@ -1,6 +1,6 @@
 # Free Kong
 
-*Free Kong* is a mini game loosely based on [https://en.wikipedia.org/wiki/Crazy_Kong](Crazy Kong) (I've never played it) using the screen style of a [https://en.wikipedia.org/wiki/ZX81](ZX81).
+*Free Kong* is a mini game loosely based on [Crazy Kong](https://en.wikipedia.org/wiki/Crazy_Kong) (I've never played it) using the screen style of a [ZX81](https://en.wikipedia.org/wiki/ZX81).
 
 ## Status
 
