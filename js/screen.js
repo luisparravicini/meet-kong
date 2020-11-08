@@ -43,16 +43,16 @@ class Screen {
   clear() {
     for (let y = 0; y < this.size.y; y++) {
       for (let x = 0; x < this.size.x; x++) {
-        this.set_char(x, y, '');
+        this.set_char('', {x: x, y: y});
       }
     }
     this.moveTo({x: 0, y: 0});
   }
 
-  set_char(x, y, c) {
+  set_char(c, pos) {
     return new Promise((resolve, _reject) => {
       setTimeout(() => {
-        this._cells[y][x].innerText = c;
+        this._cells[pos.y][pos.x].innerText = c;
         resolve();
       }, this.screenDelay);
     });

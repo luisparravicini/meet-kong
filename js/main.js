@@ -21,7 +21,7 @@ async function printCharset(screen, spaces) {
   for (let i = 0; i < chars_to_print.length; i++) {
     let c = String.fromCharCode(chars_to_print[i]);
 
-    await screen.set_char(x, y, c);
+    await screen.set_char(c, {x: x, y: y});
 
     x += 1;
     if (x >= screen.size.x) {
@@ -39,12 +39,14 @@ async function main() {
     if (event.defaultPrevented)
       return;
 
-    console.log('[input]', event.key);
+    // console.log('[input]', event.key);
 
     switch (event.key) {
       case 'ArrowLeft':
+        level.moveLeft();
         break;
       case 'ArrowRight':
+        level.moveRight();
         break;
       case '1':
         screen.clear();
@@ -91,9 +93,10 @@ async function main() {
       '        H            H          ',
       '๚H๚๚๚๚๚๚๚๚๚๚๚๚๚H๚๚๚๚๚๚๚๚๚๚๚๚๚H๚๚',
       ' H             H             H  ',
-      ' H             H             H  ',
+      ' H     x       H             H  ',
       'บบบบบบบบบบบบบบบบบบบบบบบบบบบบบบบบ',
     ];
   level.load(levelData);
   level.draw(screen);
+
 }
