@@ -37,7 +37,7 @@ class Screen {
   }
 
   moveTo(pos) {
-    // this.node.innerText = this.cursorChar;
+    this.cursor = pos;
   }
 
   clear() {
@@ -46,7 +46,7 @@ class Screen {
         this.set_char(x, y, '');
       }
     }
-    // this.moveTo({x: 0, y: 0});
+    this.moveTo({x: 0, y: 0});
   }
 
   set_char(x, y, c) {

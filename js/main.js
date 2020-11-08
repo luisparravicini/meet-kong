@@ -1,6 +1,6 @@
 
 
-async function printCharset(screen) {
+async function printCharset(screen, spaces) {
   let chars =[32, 33, 34, 35, 36, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 
               52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 
               0, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 
@@ -12,45 +12,41 @@ async function printCharset(screen) {
               213, 241, 242, 243, 244, 245, 246, 247, 248, 249, 250];
   let x = 0;
   let y = 0;
-  for (let i = 0; i < chars.length; i++) {
-    let c = String.fromCharCode(chars[i]);
+  let chars_to_print = [...chars];
+  if (spaces > 0) {
+    chars_to_print = chars_to_print.
+                        map((value) => [value, ' '.repeat(spaces)]).
+                        flat();
+  }
+  for (let i = 0; i < chars_to_print.length; i++) {
+    let c = String.fromCharCode(chars_to_print[i]);
 
     await screen.set_char(x, y, c);
 
     x += 1;
     if (x >= screen.size.x) {
       x = 0;
-      y += 1;
+      y += (spaces + 1);
     }
   }
 }
 
-async function main() {
-  let screen = new Screen('main');
-
-  // screen.clear();
-  // for (let i = 0; i < screen.size.y; i++)
-  //   await screen.print('01234567890123456789012345678901');
-
-  screen.clear();
-  // printCharset(screen);
-
-  // screen.clear();
+async function drawLevel(screen) {
   let level = [
     ' SCORE=00000            LIVES=3 ',
-    '                                ',
-    '                                ',
-    '                                ',
-    '    תתתHתתתתתתתתתתתת    תתתתתHתת',
-    '       H                     H  ',
-    '       H                     H  ',
-    '       H                     H  ',
+    '          o                     ',
+    '                        *  ³    ',
+    '    ½           תתתHתתתתת µ"ץ   ',
+    '    תתתHתתתת       H    ·_._._פ ',
+    '       H           H    µס´_קעץ ',
+    '       H           H     µ_ _ץ  ',
+    'o      H           H      _ _   ',
     'תתתתHתתתתתתתתתתHתתתתתתתתתתתתתתתת',
     '    H          H                ',
-    '    H          H                ',
-    'תHתתתתתת   תתתתתתתתHתת   תתתתתתת',
-    ' H                 H            ',
-    ' H                 H            ',
+    ' ½  H          H             ½  ',
+    'תתתתתתתת   תתתתתתתתHתת   תתתתתתת',
+    '                   H            ',
+    '            ½      H            ',
     'תתתHתתתתתתתתתת   תתתתת   תתHתתתת',
     '   H                       H    ',
     '   H                       H    ',
@@ -65,4 +61,43 @@ async function main() {
   for (let i = 0; i < level.length; i++) {
     await screen.print(level[i]);
   }
+}
+
+async function main() {
+  let screen = new Screen('main');
+
+  document.addEventListener('keydown', (event) => {
+    if (event.defaultPrevented)
+      return;
+
+    console.log('[input]', event.key);
+
+    switch (event.key) {
+      case 'ArrowLeft':
+        break;
+      case 'ArrowRight':
+        break;
+      case '1':
+        screen.clear();
+        printCharset(screen, 0);
+        break;
+      case '2':
+        screen.clear();
+        printCharset(screen, 1);
+        break;
+      case '3':
+        screen.clear();
+        drawLevel(screen);
+        break;
+    }
+  });
+
+  // screen.clear();
+  // for (let i = 0; i < screen.size.y; i++)
+  //   await screen.print('01234567890123456789012345678901');
+
+  screen.clear();
+  // printCharset(screen);
+
+  drawLevel(screen);
 }
