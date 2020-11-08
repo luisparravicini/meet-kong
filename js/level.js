@@ -4,6 +4,8 @@ class Level {
 
   constructor(screen) {
     this.screen = screen;
+    this.jumping = false;
+    this.jumpStep = 100;
 
     this.barrelEmitterChar = 'o';
     this.playerChar = 'x';
@@ -20,10 +22,60 @@ class Level {
   }
 
   moveLeft() {
+    if (this.jumping)
+      return;
+
     this._move(-1, 0);
   }
 
   moveRight() {
+    if (this.jumping)
+      return;
+
+    this._jump(1);
+  }
+
+  jumpLeft() {
+    if (this.jumping)
+      return;
+
+    this._jump(-1);
+  }
+
+  _jump(dx) {
+    this.jumping = true;
+
+    let steps = [
+      {x: dx, y: -1},
+      {x: dx, y: -1},
+      {x: dx, y: 1},
+      {x: dx, y: 1},
+    ];
+    let jumpIndex = 0;
+
+    this._moveJumpStep(steps, jumpIndex);
+  }
+
+  _moveJumpStep(steps, jumpIndex) {
+    setTimeout(() => {
+      if (jumpIndex < steps.length) {
+        let step = steps[jumpIndex];
+        let moved = this._move(step.x, step.y);
+        if (moved) {
+          this._moveJumpStep(steps, jumpIndex + 1);
+        } else {
+          this.jumping = false;
+        }
+      } else {
+        this.jumping = false;
+      }
+    }, this.jumpStep);
+  }
+
+  jumpRight() {
+    if (this.jumping)
+      return;
+
     this._move(1, 0);
   }
 
@@ -33,15 +85,17 @@ class Level {
     pos.y += dy;
 
     if (pos.x < 0 || pos.x >= this.screen.size.x)
-      return;
+      return false;
     if (pos.y < 0 || pos.y >= this.screen.size.y)
-      return;
+      return false;
 
 
     this.screen.set_char(this.charBehindPlayer, this.playerPos);
     this.playerPos = pos;
     this.charBehindPlayer = this.data[pos.y][pos.x];
     this.screen.set_char(this.playerInScreenChar, this.playerPos);
+
+    return true;
   }
 
   async draw() {

@@ -43,10 +43,16 @@ async function main() {
 
     switch (event.key) {
       case 'ArrowLeft':
-        level.moveLeft();
+        if (event.shiftKey)
+          level.jumpLeft();
+        else
+          level.moveLeft();
         break;
       case 'ArrowRight':
-        level.moveRight();
+        if (event.shiftKey)
+          level.jumpRight();
+        else
+          level.moveRight();
         break;
       case '1':
         screen.clear();
