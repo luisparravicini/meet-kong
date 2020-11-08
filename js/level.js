@@ -32,7 +32,7 @@ class Level {
     if (this.jumping)
       return;
 
-    this._jump(1);
+    this._move(1, 0);
   }
 
   jumpLeft() {
@@ -42,13 +42,19 @@ class Level {
     this._jump(-1);
   }
 
+  jumpRight() {
+    if (this.jumping)
+      return;
+
+    this._jump(1);
+  }
+
   _jump(dx) {
     this.jumping = true;
 
     let steps = [
       {x: dx, y: -1},
-      {x: dx, y: -1},
-      {x: dx, y: 1},
+      {x: dx, y: 0},
       {x: dx, y: 1},
     ];
     let jumpIndex = 0;
@@ -70,13 +76,6 @@ class Level {
         this.jumping = false;
       }
     }, this.jumpStep);
-  }
-
-  jumpRight() {
-    if (this.jumping)
-      return;
-
-    this._move(1, 0);
   }
 
   _move(dx, dy) {
