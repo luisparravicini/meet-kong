@@ -8,6 +8,11 @@ The objective of the game is to move from the bottom of the level to upper floor
 
 The game is currently a WIP.
 
+### Gotchas
+
+- You can't go down a ladder.
+- The are a lot of small things which will be not corrected. i.e.: when the screen is loading the input is inabled, etc.
+
 
 ## Keys
 
