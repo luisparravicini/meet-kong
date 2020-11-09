@@ -10,8 +10,11 @@ The game is currently a WIP.
 
 ### Gotchas
 
+There are a lot of small things which may be considered bugs but will stay as they are, such as:
+
 - You can't go down a ladder.
-- The are a lot of small things which will be not corrected. i.e.: when the screen is loading the input is inabled, etc.
+- When the screen is drawing the input is inabled.
+- You can't die, so the lives counter is just aesthetics.
 
 
 ## Keys
