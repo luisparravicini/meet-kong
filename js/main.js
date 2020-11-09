@@ -33,7 +33,7 @@ async function printCharset(screen, spaces) {
 
 async function main() {
   let screen = new Screen('main');
-  let level = new Level(screen);
+  let game = new Game(screen);
 
   document.addEventListener('keydown', (event) => {
     if (event.defaultPrevented)
@@ -44,18 +44,18 @@ async function main() {
     switch (event.key) {
       case 'ArrowLeft':
         if (event.shiftKey)
-          level.jumpLeft();
+          game.jumpLeft();
         else
-          level.moveLeft();
+          game.moveLeft();
         break;
       case 'ArrowRight':
         if (event.shiftKey)
-          level.jumpRight();
+          game.jumpRight();
         else
-          level.moveRight();
+          game.moveRight();
         break;
       case 'ArrowUp':
-        level.moveUp();
+        game.moveUp();
         break;
       case '1':
         screen.clear();
@@ -67,7 +67,7 @@ async function main() {
         break;
       case '3':
         screen.clear();
-        level.draw();
+        game.draw();
         break;
     }
   });
@@ -105,7 +105,7 @@ async function main() {
       ' H     x       H             H  ',
       'บบบบบบบบบบบบบบบบบบบบบบบบบบบบบบบบ',
     ];
-  level.load(levelData);
-  level.draw(screen);
+  game.load(levelData);
+  game.draw(screen);
 
 }

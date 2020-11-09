@@ -1,6 +1,6 @@
 /* keep encoding as iso-8859-1 */
 
-class Level {
+class Game {
 
   constructor(screen) {
     this.screen = screen;
