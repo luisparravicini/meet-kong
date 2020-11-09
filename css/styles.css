@@ -37,5 +37,5 @@ body {
 
 @font-face {
   font-family: ZX81;
-  src: url('../fonts/zx81-vdu.woff');
+  src: url('../fonts/zx81-vdu.woff') format('woff');
 }
