@@ -8,7 +8,6 @@ The objective of the game is to move from the bottom of the level to upper floor
 
 The game is currently a WIP.
 
-### Gotchas
 
 There are a lot of small things which may be considered bugs but will stay as they are, such as:
 
