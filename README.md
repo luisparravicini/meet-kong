@@ -11,6 +11,15 @@ The game is currently a WIP and it's only drawing the level to the screen.
 
 ## Keys
 
+
+### Game
+- **left arrow** Move left
+- **right arrow** Move right
+- **left arrow** and **shift** Jump left
+- **right arrow** and **shift** Jump right
+
+
+### Debug
 - **1** To clear the screen and draw all the available characters 
 - **2** To clear the screen and draw all the available characters, with a space between them
 - **3** To clear the screen and draw the level
