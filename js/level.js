@@ -11,7 +11,8 @@ class Level {
     this.playerChar = 'x';
 
     this.barrelInScreenChar = 'o';
-    this.playerInScreenChar = 'µ';
+    this.playerInScreenChar = '°';
+    this.ladderInScreenChar = 'H'
 
     this.charBehindPlayer = ' ';
   }
@@ -35,6 +36,16 @@ class Level {
     this._move(1, 0);
   }
 
+  moveUp() {
+    if (this.jumping)
+      return;
+
+    if (!this._playerIsOverLadder())
+      return;
+
+    this._move(0, -1);
+  }
+
   jumpLeft() {
     if (this.jumping)
       return;
@@ -47,6 +58,11 @@ class Level {
       return;
 
     this._jump(1);
+  }
+
+  _playerIsOverLadder() {
+    let pos = this.playerPos;
+    return (this.data[pos.y][pos.x] == this.ladderInScreenChar);
   }
 
   _jump(dx) {

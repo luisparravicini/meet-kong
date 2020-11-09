@@ -54,6 +54,9 @@ async function main() {
         else
           level.moveRight();
         break;
+      case 'ArrowUp':
+        level.moveUp();
+        break;
       case '1':
         screen.clear();
         printCharset(screen, 0);
@@ -88,13 +91,13 @@ async function main() {
       'תתתתHתתתתתתתתתתHתתתתתתתתתתתתתתתת',
       '    H          H                ',
       ' ½  H          H             ½  ',
-      'תתתתתתתת   תתתתתתתתHתת   תתתתתתת',
+      'תתתתתתתתת  תתתתתתתתHתתת  תתתתתתת',
       '                   H            ',
       '            ½      H            ',
-      'תתתHתתתתתתתתתת   תתתתת   תתHתתתת',
+      'תתתHתתתתתתתתתת  תתתתתתת  תתHתתתת',
       '   H                       H    ',
       '   H                       H    ',
-      ' תתתתתתתHתתתתת   תתתתHתתתתתתתת  ',
+      ' תתתתתתתHתתתתת  תתתתתHתתתתתתתת  ',
       '        H            H          ',
       '        H            H          ',
       'תHתתתתתתתתתתתתתHתתתתתתתתתתתתתHתת',

@@ -6,7 +6,7 @@ The objective of the game is to move from the bottom of the level to upper floor
 
 ## Status
 
-The game is currently a WIP and it's only drawing the level to the screen.
+The game is currently a WIP.
 
 
 ## Keys
@@ -17,6 +17,7 @@ The game is currently a WIP and it's only drawing the level to the screen.
 - **right arrow** Move right
 - **left arrow** and **shift** Jump left
 - **right arrow** and **shift** Jump right
+- **up arrow** climb ladders
 
 
 ### Debug
