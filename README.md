@@ -9,7 +9,7 @@ The objective of the game is to move from the bottom of the level to upper floor
 
 ## Status
 
-The game is currently a WIP.
+The main objective when developing this game was trying to emulate the look of a ZX81, so it's more a POC than a real game.
 
 
 There are a lot of small things which may be considered bugs but will stay as they are, such as:
