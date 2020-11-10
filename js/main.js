@@ -40,6 +40,7 @@ async function main() {
       return;
 
     // console.log('[input]', event.key);
+    let consumed = false;
 
     switch (event.key) {
       case 'ArrowLeft':
@@ -47,29 +48,41 @@ async function main() {
           game.jumpLeft();
         else
           game.moveLeft();
+        consumed = true;
         break;
       case 'ArrowRight':
         if (event.shiftKey)
           game.jumpRight();
         else
           game.moveRight();
+        consumed = true;
         break;
       case 'ArrowUp':
         game.moveUp();
+        consumed = true;
+        break;
+      case 'ArrowDown':
+        consumed = true;
         break;
       case '1':
         screen.clear();
         printCharset(screen, 0);
+        consumed = true;
         break;
       case '2':
         screen.clear();
         printCharset(screen, 1);
+        consumed = true;
         break;
       case '3':
         screen.clear();
         game.draw();
+        consumed = true;
         break;
     }
+
+    if (consumed)
+      event.preventDefault();
   });
 
   // screen.clear();
