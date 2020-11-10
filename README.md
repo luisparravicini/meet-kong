@@ -7,7 +7,7 @@
 
 ![Meet Kong screenshot](meet-kong.jpg "")
 
-The objective of the game is to move from the bottom of the level to upper floor and say hi to Kong.
+The objective of the game is to move from the bottom of the level to upper floor (into the ***** character) to say hi to Kong.
 
 ## Status
 
