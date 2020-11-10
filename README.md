@@ -17,7 +17,7 @@ The main objective when developing this game was trying to make something simila
 There are a lot of small things which may be considered bugs but will stay as they are, such as:
 
 - You can't go down a ladder.
-- When the screen is drawing the input is inabled.
+- When the screen is drawing the input is enabled.
 - You can't die, so the lives counter is just aesthetics.
 
 
