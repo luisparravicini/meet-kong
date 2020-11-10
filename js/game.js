@@ -11,7 +11,7 @@ class Game {
     this.playerChar = 'x';
 
     this.barrelInScreenChar = 'o';
-    this.playerInScreenChar = '°';
+    this.playerInScreenChar = "\xb0";//'°';
     this.ladderInScreenChar = 'H';
     this.emptyInScreenChar = ' ';
 

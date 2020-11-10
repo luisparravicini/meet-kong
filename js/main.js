@@ -92,32 +92,45 @@ async function main() {
   screen.clear();
   // printCharset(screen);
 
-  let levelData = [
-    ' SCORE=00000            LIVES=3 ',
-    '          o                     ',
-    '                        *  ³    ',
-    '    ½           תתתHתתתתת µ"ץ   ',
-    '    תתתHתתתת       H    ·_._._פ ',
-    '       H           H    µס´_קעץ ',
-    '       H           H     µ_ _ץ  ',
-    'o      H           H      _ _   ',
-    'תתתתHתתתתתתתתתתHתתתתתתתתתתתתתתתת',
-    '    H          H                ',
-    ' ½  H          H             ½  ',
-    'תתתתתתתתת  תתתתתתתתHתתת  תתתתתתת',
-    '                   H            ',
-    '            ½      H            ',
-    'תתתHתתתתתתתתתת  תתתתתתת  תתHתתתת',
-    '   H                       H    ',
-    '   H                       H    ',
-    ' תתתתתתתHתתתתת  תתתתתHתתתתתתתת  ',
-    '        H            H          ',
-    '        H            H          ',
-    'תHתתתתתתתתתתתתתHתתתתתתתתתתתתתHתת',
-    ' H             H             H  ',
-    ' H     x       H             H  ',
-    '÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷',
-  ];
+  // let levelData = [
+  //   ' SCORE=00000            LIVES=3 ',
+  //   '          o                     ',
+  //   '                        *  ³    ',
+  //   '    ½           תתתHתתתתת µ"ץ   ',
+  //   '    תתתHתתתת       H    ·_._._פ ',
+  //   '       H           H    µס´_קעץ ',
+  //   '       H           H     µ_ _ץ  ',
+  //   'o      H           H      _ _   ',
+  //   'תתתתHתתתתתתתתתתHתתתתתתתתתתתתתתתת',
+  //   '    H          H                ',
+  //   ' ½  H          H             ½  ',
+  //   'תתתתתתתתת  תתתתתתתתHתתת  תתתתתתת',
+  //   '                   H            ',
+  //   '            ½      H            ',
+  //   'תתתHתתתתתתתתתת  תתתתתתת  תתHתתתת',
+  //   '   H                       H    ',
+  //   '   H                       H    ',
+  //   ' תתתתתתתHתתתתת  תתתתתHתתתתתתתת  ',
+  //   '        H            H          ',
+  //   '        H            H          ',
+  //   'תHתתתתתתתתתתתתתHתתתתתתתתתתתתתHתת',
+  //   ' H             H             H  ',
+  //   ' H     x       H             H  ',
+  //   '÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷',
+  // ];
+
+  // I had problems with the strings used for the level when uploading it
+  // to itchio (I think they serve the .js files as utf-8 and I need them to be
+  // iso-8859-1).
+  // So, the solution is to encode the array commented above with the following
+  // Ruby script:
+  //
+  // require 'base64'
+  // levelData.map { |x| Base64::encode64(x.encode('iso-8859-1')) }
+  //
+  let levelData = ["IFNDT1JFPTAwMDAwICAgICAgICAgICAgTElWRVM9MyA=\n", "ICAgICAgICAgIG8gICAgICAgICAgICAgICAgICAgICA=\n", "ICAgICAgICAgICAgICAgICAgICAgICAgKiAgsyAgICA=\n", "ICAgIL0gICAgICAgICAgIPr6+kj6+vr6+iC1IvUgICA=\n", "ICAgIPr6+kj6+vr6ICAgICAgIEggICAgt18uXy5f9CA=\n", "ICAgICAgIEggICAgICAgICAgIEggICAgtfG0X/fy9SA=\n", "ICAgICAgIEggICAgICAgICAgIEggICAgILVfIF/1ICA=\n", "byAgICAgIEggICAgICAgICAgIEggICAgICBfIF8gICA=\n", "+vr6+kj6+vr6+vr6+vr6SPr6+vr6+vr6+vr6+vr6+vo=\n", "ICAgIEggICAgICAgICAgSCAgICAgICAgICAgICAgICA=\n", "IL0gIEggICAgICAgICAgSCAgICAgICAgICAgICC9ICA=\n", "+vr6+vr6+vr6ICD6+vr6+vr6+kj6+vogIPr6+vr6+vo=\n", "ICAgICAgICAgICAgICAgICAgIEggICAgICAgICAgICA=\n", "ICAgICAgICAgICAgvSAgICAgIEggICAgICAgICAgICA=\n", "+vr6SPr6+vr6+vr6+vogIPr6+vr6+vogIPr6SPr6+vo=\n", "ICAgSCAgICAgICAgICAgICAgICAgICAgICAgSCAgICA=\n", "ICAgSCAgICAgICAgICAgICAgICAgICAgICAgSCAgICA=\n", "IPr6+vr6+vpI+vr6+vogIPr6+vr6SPr6+vr6+vr6ICA=\n", "ICAgICAgICBIICAgICAgICAgICAgSCAgICAgICAgICA=\n", "ICAgICAgICBIICAgICAgICAgICAgSCAgICAgICAgICA=\n", "+kj6+vr6+vr6+vr6+vr6SPr6+vr6+vr6+vr6+vpI+vo=\n", "IEggICAgICAgICAgICAgSCAgICAgICAgICAgICBIICA=\n", "IEggICAgIHggICAgICAgSCAgICAgICAgICAgICBIICA=\n", "urq6urq6urq6urq6urq6urq6urq6urq6urq6urq6uro=\n"];
+  levelData = levelData.map(x => atob(x));
+
   game.load(levelData);
   game.draw(screen);
 
