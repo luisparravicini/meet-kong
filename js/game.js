@@ -12,7 +12,8 @@ class Game {
 
     this.barrelInScreenChar = 'o';
     this.playerInScreenChar = '°';
-    this.ladderInScreenChar = 'H'
+    this.ladderInScreenChar = 'H';
+    this.emptyInScreenChar = ' ';
 
     this.charBehindPlayer = ' ';
   }
@@ -23,41 +24,59 @@ class Game {
   }
 
   moveLeft() {
-    if (this.jumping)
-      return;
+    if (!this._canMove()) return;
 
     this._move(-1, 0);
   }
 
   moveRight() {
-    if (this.jumping)
-      return;
+    if (!this._canMove()) return;
 
     this._move(1, 0);
   }
 
   moveUp() {
-    if (this.jumping)
-      return;
+    if (!this._canMove()) return;
 
-    if (!this._playerIsOverLadder())
-      return;
+    if (!this._playerIsOverLadder()) return;
 
     this._move(0, -1);
   }
 
   jumpLeft() {
-    if (this.jumping)
-      return;
+    if (!this._canMove()) return;
 
     this._jump(-1);
   }
 
   jumpRight() {
+    if (!this._canMove()) return;
+
+    this._jump(1);
+  }
+
+  update() {
     if (this.jumping)
       return;
 
-    this._jump(1);
+    if (!this._isGrounded(this.playerPos))
+      this._move(0, 1);
+  }
+
+  _canMove() {
+    return this._isGrounded(this.playerPos);
+  }
+
+  _isGrounded(pos) {
+    let y = pos.y + 1;
+    if (y >= this.screen.size.y)
+      return true;
+
+    let c = this.data[y][pos.x];
+    if (c == this.emptyInScreenChar)
+      return false;
+
+    return true;
   }
 
   _playerIsOverLadder() {
