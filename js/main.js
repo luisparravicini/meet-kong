@@ -134,7 +134,8 @@ async function main() {
   game.load(levelData);
   game.draw(screen);
 
+  let dt = 100;
   setInterval(() => {
     game.update();
-  }, 100);
+  }, dt);
 }

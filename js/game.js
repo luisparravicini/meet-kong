@@ -6,11 +6,13 @@ class Game {
     this.screen = screen;
     this.jumping = false;
     this.jumpStep = 100;
+    this.barrels = [];
+    this.barrelEmitTime = 5000;
 
     this.barrelEmitterChar = 'o';
     this.playerChar = 'x';
 
-    this.barrelInScreenChar = 'o';
+    this.barrelInScreenChar = 'O';
     this.playerInScreenChar = "\xb0";//'°';
     this.ladderInScreenChar = 'H';
     this.emptyInScreenChar = ' ';
@@ -38,7 +40,7 @@ class Game {
   moveUp() {
     if (!this._canMove()) return;
 
-    if (!this._playerIsOverLadder()) return;
+    if (!this._isOverLadder(this.playerPos)) return;
 
     this._move(0, -1);
   }
@@ -61,6 +63,54 @@ class Game {
 
     if (!this._isGrounded(this.playerPos))
       this._move(0, 1);
+
+
+    
+    this._updateBarrels();
+  }
+
+  _emitBarrel() {
+    let pos = this.barrelEmmitters[Math.floor(Math.random() * this.barrelEmmitters.length)];
+    let barrel = new Barrel(pos);
+    this.barrels.push(barrel);
+  }
+
+  _updateBarrels() {
+    let forRemoval = [];
+
+    this.barrels.forEach(barrel => {
+      let moved = false;
+      let oldPos = Object.assign({}, barrel.pos);
+
+      if (!this._isGrounded(barrel.pos)) {
+          barrel.pos.y += 1;
+          moved = true;
+      } else {
+        let dx = (barrel.movingRight ? 1 : -1);
+        barrel.pos.x += dx;
+        if (barrel.pos.y >= this.screen.size.y - 1) {
+          if (barrel.pos.x < 0 || barrel.pos.x >= this.screen.size.x) {
+            forRemoval.push(barrel);
+          }
+        } else if (barrel.pos.x < 0 || barrel.pos.x >= this.screen.size.x) {
+            barrel.pos.x += dx * -1;
+            barrel.movingRight = !barrel.movingRight;
+        } else if (this._isOverLadder(barrel.pos)) {
+            barrel.pos.y += 1;
+            barrel.movingRight = barrel._getNewDirection();
+            moved = true;
+        } else
+          moved = true;
+      }
+
+      if (moved) {
+          this.screen.set_char(this.data[oldPos.y][oldPos.x], oldPos);
+          this.screen.set_char(this.barrelInScreenChar, barrel.pos);
+      }
+
+    });
+
+    forRemoval.forEach(x => this.barrels.splice(this.barrels.indexOf(x), 1));
   }
 
   _canMove() {
@@ -79,8 +129,7 @@ class Game {
     return true;
   }
 
-  _playerIsOverLadder() {
-    let pos = this.playerPos;
+  _isOverLadder(pos) {
     return (this.data[pos.y][pos.x] == this.ladderInScreenChar);
   }
 
@@ -163,6 +212,11 @@ class Game {
 
     console.log('found', this.barrelEmmitters.length, ' barrel emitters');
     console.log('player pos at', this.playerPos);
+
+    setInterval(() => {
+      if (this.barrels.length < 1)
+        this._emitBarrel();
+    }, this.barrelEmitTime);
   }
 
 }
