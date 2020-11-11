@@ -40,7 +40,7 @@ class Game {
   moveUp() {
     if (!this._canMove()) return;
 
-    if (!this._isOverLadder(this.playerPos)) return;
+    if (!this.isOverLadder(this.playerPos)) return;
 
     this._move(0, -1);
   }
@@ -61,7 +61,7 @@ class Game {
     if (this.jumping)
       return;
 
-    if (!this._isGrounded(this.playerPos))
+    if (!this.isGrounded(this.playerPos))
       this._move(0, 1);
 
 
@@ -71,7 +71,7 @@ class Game {
 
   _emitBarrel() {
     let pos = this.barrelEmmitters[Math.floor(Math.random() * this.barrelEmmitters.length)];
-    let barrel = new Barrel(pos);
+    let barrel = new Barrel(this, pos);
     this.barrels.push(barrel);
   }
 
@@ -79,45 +79,26 @@ class Game {
     let forRemoval = [];
 
     this.barrels.forEach(barrel => {
-      let moved = false;
       let oldPos = Object.assign({}, barrel.pos);
+      barrel.update();
 
-      if (!this._isGrounded(barrel.pos)) {
-          barrel.pos.y += 1;
-          moved = true;
-      } else {
-        let dx = (barrel.movingRight ? 1 : -1);
-        barrel.pos.x += dx;
-        if (barrel.pos.y >= this.screen.size.y - 1) {
-          if (barrel.pos.x < 0 || barrel.pos.x >= this.screen.size.x) {
-            forRemoval.push(barrel);
-          }
-        } else if (barrel.pos.x < 0 || barrel.pos.x >= this.screen.size.x) {
-            barrel.pos.x += dx * -1;
-            barrel.movingRight = !barrel.movingRight;
-        } else if (this._isOverLadder(barrel.pos)) {
-            barrel.pos.y += 1;
-            barrel.movingRight = barrel._getNewDirection();
-            moved = true;
-        } else
-          moved = true;
-      }
-
-      if (moved) {
+      if (barrel.moved) {
           this.screen.set_char(this.data[oldPos.y][oldPos.x], oldPos);
           this.screen.set_char(this.barrelInScreenChar, barrel.pos);
       }
 
+      if (barrel.deleteMe)
+        forRemoval.push(barrel);
     });
 
     forRemoval.forEach(x => this.barrels.splice(this.barrels.indexOf(x), 1));
   }
 
   _canMove() {
-    return this._isGrounded(this.playerPos);
+    return this.isGrounded(this.playerPos);
   }
 
-  _isGrounded(pos) {
+  isGrounded(pos) {
     let y = pos.y + 1;
     if (y >= this.screen.size.y)
       return true;
@@ -129,7 +110,7 @@ class Game {
     return true;
   }
 
-  _isOverLadder(pos) {
+  isOverLadder(pos) {
     return (this.data[pos.y][pos.x] == this.ladderInScreenChar);
   }
 
