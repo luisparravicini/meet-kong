@@ -94,28 +94,28 @@ async function main() {
 
   // let levelData = [
   //   ' SCORE=00000            LIVES=3 ',
-  //   '          o                     ',
+  //   '                                ',
   //   '                        *  ³    ',
   //   '    ½           תתתHתתתתת µ"ץ   ',
-  //   '    תתתHתתתת       H    ·_._._פ ',
+  //   '    תתתHתתתת       H  o ·_._._פ ',
   //   '       H           H    µס´_קעץ ',
   //   '       H           H     µ_ _ץ  ',
   //   'o      H           H      _ _   ',
-  //   'תתתתHתתתתתתתתתתHתתתתתתתתתתתתתתתת',
-  //   '    H          H                ',
-  //   ' ½  H          H             ½  ',
+  //   'תתתתHתתתתתתתתתתHתתתתתתתתתתתתתתHת',
+  //   '    H          H              H ',
+  //   ' ½  H          H           ½  H ',
   //   'תתתתתתתתת  תתתתתתתתHתתת  תתתתתתת',
   //   '                   H            ',
-  //   '            ½      H            ',
-  //   'תתתHתתתתתתתתתת  תתתתתתת  תתHתתתת',
+  //   '             ½     H            ',
+  //   'תתתHתתתתתתת  תתתתתתתתת  תתתHתתתת',
   //   '   H                       H    ',
   //   '   H                       H    ',
-  //   ' תתתתתתתHתתתתת  תתתתתHתתתתתתתת  ',
+  //   ' תתתתתתתHתתתתתת  תתתתHתתתתתתתת  ',
   //   '        H            H          ',
   //   '        H            H          ',
-  //   'תHתתתתתתתתתתתתתHתתתתתתתתתתתתתHתת',
-  //   ' H             H             H  ',
-  //   ' H     x       H             H  ',
+  //   'תHתתתתתתתתתתתתתתתתHתתתתתתתתתתHתת',
+  //   ' H                H          H  ',
+  //   ' H     x          H          H  ',
   //   '÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷',
   // ];
 
@@ -128,13 +128,13 @@ async function main() {
   // require 'base64'
   // levelData.map { |x| Base64::encode64(x.encode('iso-8859-1')) }
   //
-  let levelData = ["IFNDT1JFPTAwMDAwICAgICAgICAgICAgTElWRVM9MyA=\n", "ICAgICAgICAgIG8gICAgICAgICAgICAgICAgICAgICA=\n", "ICAgICAgICAgICAgICAgICAgICAgICAgKiAgsyAgICA=\n", "ICAgIL0gICAgICAgICAgIPr6+kj6+vr6+iC1IvUgICA=\n", "ICAgIPr6+kj6+vr6ICAgICAgIEggICAgt18uXy5f9CA=\n", "ICAgICAgIEggICAgICAgICAgIEggICAgtfG0X/fy9SA=\n", "ICAgICAgIEggICAgICAgICAgIEggICAgILVfIF/1ICA=\n", "byAgICAgIEggICAgICAgICAgIEggICAgICBfIF8gICA=\n", "+vr6+kj6+vr6+vr6+vr6SPr6+vr6+vr6+vr6+vr6+vo=\n", "ICAgIEggICAgICAgICAgSCAgICAgICAgICAgICAgICA=\n", "IL0gIEggICAgICAgICAgSCAgICAgICAgICAgICC9ICA=\n", "+vr6+vr6+vr6ICD6+vr6+vr6+kj6+vogIPr6+vr6+vo=\n", "ICAgICAgICAgICAgICAgICAgIEggICAgICAgICAgICA=\n", "ICAgICAgICAgICAgvSAgICAgIEggICAgICAgICAgICA=\n", "+vr6SPr6+vr6+vr6+vogIPr6+vr6+vogIPr6SPr6+vo=\n", "ICAgSCAgICAgICAgICAgICAgICAgICAgICAgSCAgICA=\n", "ICAgSCAgICAgICAgICAgICAgICAgICAgICAgSCAgICA=\n", "IPr6+vr6+vpI+vr6+vogIPr6+vr6SPr6+vr6+vr6ICA=\n", "ICAgICAgICBIICAgICAgICAgICAgSCAgICAgICAgICA=\n", "ICAgICAgICBIICAgICAgICAgICAgSCAgICAgICAgICA=\n", "+kj6+vr6+vr6+vr6+vr6SPr6+vr6+vr6+vr6+vpI+vo=\n", "IEggICAgICAgICAgICAgSCAgICAgICAgICAgICBIICA=\n", "IEggICAgIHggICAgICAgSCAgICAgICAgICAgICBIICA=\n", "urq6urq6urq6urq6urq6urq6urq6urq6urq6urq6uro=\n"];
+  let levelData = ["IFNDT1JFPTAwMDAwICAgICAgICAgICAgTElWRVM9MyA=\n", "ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA=\n", "ICAgICAgICAgICAgICAgICAgICAgICAgKiAgsyAgICA=\n", "ICAgIL0gICAgICAgICAgIPr6+kj6+vr6+iC1IvUgICA=\n", "ICAgIPr6+kj6+vr6ICAgICAgIEggIG8gt18uXy5f9CA=\n", "ICAgICAgIEggICAgICAgICAgIEggICAgtfG0X/fy9SA=\n", "ICAgICAgIEggICAgICAgICAgIEggICAgILVfIF/1ICA=\n", "byAgICAgIEggICAgICAgICAgIEggICAgICBfIF8gICA=\n", "+vr6+kj6+vr6+vr6+vr6SPr6+vr6+vr6+vr6+vr6SPo=\n", "ICAgIEggICAgICAgICAgSCAgICAgICAgICAgICAgSCA=\n", "IL0gIEggICAgICAgICAgSCAgICAgICAgICAgvSAgSCA=\n", "+vr6+vr6+vr6ICD6+vr6+vr6+kj6+vogIPr6+vr6+vo=\n", "ICAgICAgICAgICAgICAgICAgIEggICAgICAgICAgICA=\n", "ICAgICAgICAgICAgIL0gICAgIEggICAgICAgICAgICA=\n", "+vr6SPr6+vr6+vogIPr6+vr6+vr6+iAg+vr6SPr6+vo=\n", "ICAgSCAgICAgICAgICAgICAgICAgICAgICAgSCAgICA=\n", "ICAgSCAgICAgICAgICAgICAgICAgICAgICAgSCAgICA=\n", "IPr6+vr6+vpI+vr6+vr6ICD6+vr6SPr6+vr6+vr6ICA=\n", "ICAgICAgICBIICAgICAgICAgICAgSCAgICAgICAgICA=\n", "ICAgICAgICBIICAgICAgICAgICAgSCAgICAgICAgICA=\n", "+kj6+vr6+vr6+vr6+vr6+vr6SPr6+vr6+vr6+vpI+vo=\n", "IEggICAgICAgICAgICAgICAgSCAgICAgICAgICBIICA=\n", "IEggICAgIHggICAgICAgICAgSCAgICAgICAgICBIICA=\n", "urq6urq6urq6urq6urq6urq6urq6urq6urq6urq6uro=\n"];
   levelData = levelData.map(x => atob(x));
 
   game.load(levelData);
   game.draw(screen);
 
-  let dt = 100;
+  let dt = 200;
   setInterval(() => {
     game.update();
   }, dt);

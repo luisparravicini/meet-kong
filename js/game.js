@@ -7,7 +7,8 @@ class Game {
     this.jumping = false;
     this.jumpStep = 100;
     this.barrels = [];
-    this.barrelEmitTime = 5000;
+    this.barrelEmitTime = 4000;
+    this.maxBarrelsInPlay = 4;
 
     this.barrelEmitterChar = 'o';
     this.playerChar = 'x';
@@ -70,8 +71,9 @@ class Game {
   }
 
   _emitBarrel() {
-    let pos = this.barrelEmmitters[Math.floor(Math.random() * this.barrelEmmitters.length)];
-    let barrel = new Barrel(this, pos);
+    let emitter = this.barrelEmmitters[Math.floor(Math.random() * this.barrelEmmitters.length)];
+    let barrelPos = Object.assign({}, emitter);
+    let barrel = new Barrel(this, barrelPos);
     this.barrels.push(barrel);
   }
 
@@ -82,13 +84,14 @@ class Game {
       let oldPos = Object.assign({}, barrel.pos);
       barrel.update();
 
-      if (barrel.moved) {
+      if (barrel.deleteMe) {
+        forRemoval.push(barrel);
+        this.screen.set_char(this.data[oldPos.y][oldPos.x], oldPos);
+      } else if (barrel.moved) {
           this.screen.set_char(this.data[oldPos.y][oldPos.x], oldPos);
           this.screen.set_char(this.barrelInScreenChar, barrel.pos);
       }
 
-      if (barrel.deleteMe)
-        forRemoval.push(barrel);
     });
 
     forRemoval.forEach(x => this.barrels.splice(this.barrels.indexOf(x), 1));
@@ -111,6 +114,9 @@ class Game {
   }
 
   isOverLadder(pos) {
+    if (pos.y >= this.screen.size.y)
+      return false;
+
     return (this.data[pos.y][pos.x] == this.ladderInScreenChar);
   }
 
@@ -195,7 +201,7 @@ class Game {
     console.log('player pos at', this.playerPos);
 
     setInterval(() => {
-      if (this.barrels.length < 1)
+      if (this.barrels.length < this.maxBarrelsInPlay)
         this._emitBarrel();
     }, this.barrelEmitTime);
   }
