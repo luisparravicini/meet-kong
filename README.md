@@ -14,11 +14,13 @@ The objective of the game is to move from the bottom of the level to upper floor
 The main objective when developing this game was trying to make something similar to a ZX81, so it's more a POC than a real game.
 
 
-There are a lot of small things which may be considered bugs but will stay as they are, such as:
+There are a lot of things which may be considered bugs but will stay as they are, such as:
 
 - You can't go down a ladder.
 - When the screen is drawing the input is enabled.
 - You can't die, so the lives counter is just aesthetics.
+- Barrels doesn't kill you.
+- When you get to the top, there's no logic to chat with Kong 😞.
 
 
 ## Keys
