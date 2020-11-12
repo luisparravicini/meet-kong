@@ -96,7 +96,7 @@ async function main() {
   //   ' SCORE=00000            LIVES=3 ',
   //   '                                ',
   //   '                        *  ³    ',
-  //   '    ½           úúúHúúúúú µ"õ   ',
+  //   '    ½           úúúHúú¸úú µ"õ   ',
   //   '    úúúHúúúú       H  o ·_._._ô ',
   //   '       H           H    µñ´_÷òõ ',
   //   '       H           H     µ_ _õ  ',
@@ -128,7 +128,7 @@ async function main() {
   // require 'base64'
   // levelData.map { |x| Base64::encode64(x.encode('iso-8859-1')) }
   //
-  let levelData = ["IFNDT1JFPTAwMDAwICAgICAgICAgICAgTElWRVM9MyA=\n", "ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA=\n", "ICAgICAgICAgICAgICAgICAgICAgICAgKiAgsyAgICA=\n", "ICAgIL0gICAgICAgICAgIPr6+kj6+vr6+iC1IvUgICA=\n", "ICAgIPr6+kj6+vr6ICAgICAgIEggIG8gt18uXy5f9CA=\n", "ICAgICAgIEggICAgICAgICAgIEggICAgtfG0X/fy9SA=\n", "ICAgICAgIEggICAgICAgICAgIEggICAgILVfIF/1ICA=\n", "byAgICAgIEggICAgICAgICAgIEggICAgICBfIF8gICA=\n", "+vr6+kj6+vr6+vr6+vr6SPr6+vr6+vr6+vr6+vr6SPo=\n", "ICAgIEggICAgICAgICAgSCAgICAgICAgICAgICAgSCA=\n", "IL0gIEggICAgICAgICAgSCAgICAgICAgICAgvSAgSCA=\n", "+vr6+vr6+vr6ICD6+vr6+vr6+kj6+vogIPr6+vr6+vo=\n", "ICAgICAgICAgICAgICAgICAgIEggICAgICAgICAgICA=\n", "ICAgICAgICAgICAgIL0gICAgIEggICAgICAgICAgICA=\n", "+vr6SPr6+vr6+vogIPr6+vr6+vr6+iAg+vr6SPr6+vo=\n", "ICAgSCAgICAgICAgICAgICAgICAgICAgICAgSCAgICA=\n", "ICAgSCAgICAgICAgICAgICAgICAgICAgICAgSCAgICA=\n", "IPr6+vr6+vpI+vr6+vr6ICD6+vr6SPr6+vr6+vr6ICA=\n", "ICAgICAgICBIICAgICAgICAgICAgSCAgICAgICAgICA=\n", "ICAgICAgICBIICAgICAgICAgICAgSCAgICAgICAgICA=\n", "+kj6+vr6+vr6+vr6+vr6+vr6SPr6+vr6+vr6+vpI+vo=\n", "IEggICAgICAgICAgICAgICAgSCAgICAgICAgICBIICA=\n", "IEggICAgIHggICAgICAgICAgSCAgICAgICAgICBIICA=\n", "urq6urq6urq6urq6urq6urq6urq6urq6urq6urq6uro=\n"];
+  let levelData = ["IFNDT1JFPTAwMDAwICAgICAgICAgICAgTElWRVM9MyA=\n", "ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA=\n", "ICAgICAgICAgICAgICAgICAgICAgICAgKiAgsyAgICA=\n", "ICAgIL0gICAgICAgICAgIPr6+kj6+rj6+iC1IvUgICA=\n", "ICAgIPr6+kj6+vr6ICAgICAgIEggIG8gt18uXy5f9CA=\n", "ICAgICAgIEggICAgICAgICAgIEggICAgtfG0X/fy9SA=\n", "ICAgICAgIEggICAgICAgICAgIEggICAgILVfIF/1ICA=\n", "byAgICAgIEggICAgICAgICAgIEggICAgICBfIF8gICA=\n", "+vr6+kj6+vr6+vr6+vr6SPr6+vr6+vr6+vr6+vr6SPo=\n", "ICAgIEggICAgICAgICAgSCAgICAgICAgICAgICAgSCA=\n", "IL0gIEggICAgICAgICAgSCAgICAgICAgICAgvSAgSCA=\n", "+vr6+vr6+vr6ICD6+vr6+vr6+kj6+vogIPr6+vr6+vo=\n", "ICAgICAgICAgICAgICAgICAgIEggICAgICAgICAgICA=\n", "ICAgICAgICAgICAgIL0gICAgIEggICAgICAgICAgICA=\n", "+vr6SPr6+vr6+vogIPr6+vr6+vr6+iAg+vr6SPr6+vo=\n", "ICAgSCAgICAgICAgICAgICAgICAgICAgICAgSCAgICA=\n", "ICAgSCAgICAgICAgICAgICAgICAgICAgICAgSCAgICA=\n", "IPr6+vr6+vpI+vr6+vr6ICD6+vr6SPr6+vr6+vr6ICA=\n", "ICAgICAgICBIICAgICAgICAgICAgSCAgICAgICAgICA=\n", "ICAgICAgICBIICAgICAgICAgICAgSCAgICAgICAgICA=\n", "+kj6+vr6+vr6+vr6+vr6+vr6SPr6+vr6+vr6+vpI+vo=\n", "IEggICAgICAgICAgICAgICAgSCAgICAgICAgICBIICA=\n", "IEggICAgIHggICAgICAgICAgSCAgICAgICAgICBIICA=\n", "urq6urq6urq6urq6urq6urq6urq6urq6urq6urq6uro=\n"];
   levelData = levelData.map(x => atob(x));
 
   game.load(levelData);

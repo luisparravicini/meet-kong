@@ -9,12 +9,16 @@ class Game {
     this.barrels = [];
     this.barrelEmitTime = 4000;
     this.maxBarrelsInPlay = 4;
+    this.boxPoints = 50;
+    this.scoreX = 7;
+    this.points = 0;
 
     this.barrelEmitterChar = 'o';
     this.playerChar = 'x';
 
     this.barrelInScreenChar = 'O';
-    this.playerInScreenChar = "\xb0";//'°';
+    this.playerInScreenChar = "\xb0";
+    this.pointBoxInScreenChar = "\xbd";
     this.ladderInScreenChar = 'H';
     this.emptyInScreenChar = ' ';
 
@@ -65,9 +69,28 @@ class Game {
     if (!this.isGrounded(this.playerPos))
       this._move(0, 1);
 
-
+    if (this._isOverPointsBox(this.playerPos)) {
+      this.charBehindPlayer = this.emptyInScreenChar;
+      this._set_data(this.playerPos, this.charBehindPlayer);
+      this.points += this.boxPoints;
+      this._updateScore();
+    }
     
     this._updateBarrels();
+  }
+
+  _isOverPointsBox(pos) {
+    return (this.data[pos.y][pos.x] == this.pointBoxInScreenChar);
+  }
+
+  _updateScore() {
+    let scoreMsg = this.points.toString();
+    while (scoreMsg.length < 5)
+      scoreMsg = '0' + scoreMsg;
+
+    for (let x = 0; x < scoreMsg.length; x++) {
+      this.screen.set_char(scoreMsg[x], {x: x + this.scoreX, y: 0});
+    }
   }
 
   _emitBarrel() {
@@ -176,6 +199,11 @@ class Game {
     await this.screen.set_char(this.playerInScreenChar, this.playerPos);
   }
 
+  _set_data(pos, value) {
+    let line = this.data[pos.y];
+    this.data[pos.y] = line.substring(0, pos.x) + value + line.substring(pos.x + 1);
+  }
+
   _setup() {
     let positions = [];
     let playerPos = {x: 0, y: 0};
@@ -189,7 +217,7 @@ class Game {
 
         if (line[x] == this.playerChar) {
           playerPos = {x: x, y: y};
-          this.data[y] = line.substring(0, x) + ' ' + line.substring(x + 1);
+          this._set_data(playerPos, this.emptyInScreenChar);
         }
       }
     }
