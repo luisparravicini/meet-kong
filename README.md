@@ -19,7 +19,7 @@ There are a lot of things which may be considered bugs but will stay as they are
 - You can't go down a ladder.
 - When the screen is drawing the input is enabled.
 - You can't die, so the lives counter is just aesthetics.
-- Barrels doesn't kill you.
+- Barrels don't kill you.
 - When you get to the top, there's no logic to chat with Kong 😞.
 
 
