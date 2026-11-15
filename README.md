@@ -40,6 +40,17 @@ There are a lot of things which may be considered bugs but will stay as they are
 - **3** To clear the screen and draw the level
 
 
+## Development videos
+
+Short clips from November 2020 showing the game taking shape:
+
+- [Warmup](assets/dev-screenshots/01-warmup.mp4)
+- [Drawing the level](assets/dev-screenshots/02-level.mp4)
+- [Movement](assets/dev-screenshots/03-moving.mp4)
+- [Falling](assets/dev-screenshots/04-falling.mp4)
+- [Barrels](assets/dev-screenshots/05-barrels.mp4)
+
+
 ## Font
 
 The font used is from http://www.dilwyn.me.uk/fonts/ but exported as .woff with FontForge.
